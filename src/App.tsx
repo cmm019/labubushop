@@ -1574,8 +1574,7 @@ function App() {
             <p className="text-xs text-gray-500 text-center mt-4">
               Seus dados estão protegidos e serão usados apenas para entrega
             </p>
-          </form>
-        </div>
+          </div>
       </div>
     );
   };
