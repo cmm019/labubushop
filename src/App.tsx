@@ -1478,117 +1478,85 @@ function App() {
             </div>
           </div>
 
-         import React, { useState } from 'react';
-import { User } from 'lucide-react'; // ou de onde você importe o ícone
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="bg-white/95 rounded-2xl p-6 shadow-xl border-4 border-pink-200">
+              <h3 className="text-lg font-bold text-purple-600 mb-4 flex items-center gap-2">
+                <User className="w-5 h-5" />
+                Dados para entrega
+              </h3>
+              
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Nome completo
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={userData.name}
+                    onChange={(e) => handleNameChange(e.target.value)}
+                    className="w-full p-4 border-3 border-pink-200 rounded-xl focus:border-purple-400 focus:outline-none transition-all duration-300 hover:shadow-lg"
+                    placeholder="Seu nome completo"
+                  />
+                </div>
 
-function Checkout({ handleSubmit }) {
-  // ← Aqui ficam o estado e o handler, antes do return:
-  const [userData, setUserData] = useState({
-    name: "",
-    whatsapp: "",
-    email: "",
-    cep: "",
-    address: ""
-  });
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    WhatsApp
+                  </label>
+                  <input
+                    type="tel"
+                    required
+                    value={userData.whatsapp}
+                    onChange={(e) => handleWhatsappChange(e.target.value)}
+                    className="w-full p-4 border-3 border-pink-200 rounded-xl focus:border-purple-400 focus:outline-none transition-all duration-300 hover:shadow-lg"
+                    placeholder="(11) 99999-9999"
+                  />
+                </div>
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setUserData(prev => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    E-mail
+                  </label>
+                  <input
+                    type="email"
+                    required
+                    value={userData.email}
+                    onChange={(e) => handleEmailChange(e.target.value)}
+                    className="w-full p-4 border-3 border-pink-200 rounded-xl focus:border-purple-400 focus:outline-none transition-all duration-300 hover:shadow-lg"
+                    placeholder="seu@email.com"
+                  />
+                </div>
 
-  return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <div className="bg-white/95 rounded-2xl p-6 shadow-xl border-4 border-pink-200">
-        <h3 className="text-lg font-bold text-purple-600 mb-4 flex items-center gap-2">
-          <User className="w-5 h-5" />
-          Dados para entrega
-        </h3>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    CEP
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={userData.cep}
+                    onChange={(e) => handleCepChange(e.target.value)}
+                    className="w-full p-4 border-3 border-pink-200 rounded-xl focus:border-purple-400 focus:outline-none transition-all duration-300 hover:shadow-lg"
+                    placeholder="00000-000"
+                    maxLength={9}
+                  />
+                </div>
 
-        <div className="space-y-4">
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">
-              Nome completo
-            </label>
-            <input
-              name="name"
-              type="text"
-              required
-              value={userData.name}
-              onChange={handleInputChange}
-              className="w-full p-4 border-3 border-pink-200 rounded-xl focus:border-purple-400 focus:outline-none transition-all duration-300 hover:shadow-lg"
-              placeholder="Seu nome completo"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">
-              WhatsApp
-            </label>
-            <input
-              name="whatsapp"
-              type="tel"
-              required
-              value={userData.whatsapp}
-              onChange={handleInputChange}
-              className="w-full p-4 border-3 border-pink-200 rounded-xl focus:border-purple-400 focus:outline-none transition-all duration-300 hover:shadow-lg"
-              placeholder="(11) 99999-9999"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">
-              E-mail
-            </label>
-            <input
-              name="email"
-              type="email"
-              required
-              value={userData.email}
-              onChange={handleInputChange}
-              className="w-full p-4 border-3 border-pink-200 rounded-xl focus:border-purple-400 focus:outline-none transition-all duration-300 hover:shadow-lg"
-              placeholder="seu@email.com"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">
-              CEP
-            </label>
-            <input
-              name="cep"
-              type="text"
-              required
-              value={userData.cep}
-              onChange={handleInputChange}
-              className="w-full p-4 border-3 border-pink-200 rounded-xl focus:border-purple-400 focus:outline-none transition-all duration-300 hover:shadow-lg"
-              placeholder="00000-000"
-              maxLength={9}
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">
-              Endereço completo
-            </label>
-            <textarea
-              name="address"
-              required
-              value={userData.address}
-              onChange={handleInputChange}
-              className="w-full p-4 border-3 border-pink-200 rounded-xl focus:border-purple-400 focus:outline-none h-24 resize-none transition-all duration-300 hover:shadow-lg"
-              placeholder="Rua, número, bairro, cidade, estado..."
-            />
-          </div>
-        </div>
-      </div>
-    </form>
-  );
-}
-
-export default Checkout;
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Endereço completo
+                  </label>
+                  <textarea
+                    required
+                    value={userData.address}
+                    onChange={(e) => handleAddressChange(e.target.value)}
+                    className="w-full p-4 border-3 border-pink-200 rounded-xl focus:border-purple-400 focus:outline-none h-24 resize-none transition-all duration-300 hover:shadow-lg"
+                    placeholder="Rua, número, bairro, cidade, estado..."
+                  />
+                </div>
+              </div>
+            </div>
 
             <button
               type="submit"
