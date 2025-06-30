@@ -294,6 +294,18 @@ const ResultModal = ({
   );
 };
 
+ // Phase 6 - Checkout - ENHANCED WITH PRODUCT SHOWCASE AND FIXED FORM INPUTS
+  const CheckoutPhase = () => {
+    const totalOriginalPrice = selectedProducts.reduce((sum, product) => sum + product.originalPrice, 0);
+    const totalSavings = totalOriginalPrice - 24.90;
+    const savingsPercentage = Math.round((totalSavings / totalOriginalPrice) * 100);
+
+    const handleSubmit = (e: React.FormEvent) => {
+      e.preventDefault();
+      // Redirect to payment link
+      window.open('https://app.pushinpay.com.br/service/pay/9f45c45f-f64a-4d99-aaf4-748ab43ec57c', '_blank');
+    };
+
 function App() {
   const [currentPhase, setCurrentPhase] = useState<Phase>('welcome');
   const [selectedProducts, setSelectedProducts] = useState<Product[]>([]);
@@ -304,6 +316,8 @@ function App() {
     address: '',
     cep: ''
   });
+
+    
   const [quizData, setQuizData] = useState<QuizData>({
     name: '',
     motivation: '',
@@ -1358,17 +1372,7 @@ function App() {
     );
   };
 
-  // Phase 6 - Checkout - ENHANCED WITH PRODUCT SHOWCASE AND FIXED FORM INPUTS
-  const CheckoutPhase = () => {
-    const totalOriginalPrice = selectedProducts.reduce((sum, product) => sum + product.originalPrice, 0);
-    const totalSavings = totalOriginalPrice - 24.90;
-    const savingsPercentage = Math.round((totalSavings / totalOriginalPrice) * 100);
-
-    const handleSubmit = (e: React.FormEvent) => {
-      e.preventDefault();
-      // Redirect to payment link
-      window.open('https://app.pushinpay.com.br/service/pay/9f45c45f-f64a-4d99-aaf4-748ab43ec57c', '_blank');
-    };
+ 
 
     return (
       <div className="min-h-screen bg-gradient-to-br from-green-200 via-blue-200 to-purple-200 p-4">
@@ -1592,8 +1596,16 @@ function App() {
       case 'challenge': return <ChallengePhase />;
       case 'loading4': return <LoadingScreen message="Preparando sua recompensa de campeão..." nextPhase="wheel2" />;
       case 'wheel2': return <Wheel2Phase />;
-      case 'checkout': return <CheckoutPhase />;
-      default: return <WelcomePhase />;
+      case 'checkout':
+   return (
+     <CheckoutPhase
+       selectedProducts={selectedProducts}
+       userData={userData}
+       setUserData={setUserData}
+       onSubmit={handleCheckoutSubmit}
+     />
+   );
+      default: return <Welcome  Phase />;
     }
   };
 
